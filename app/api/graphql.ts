@@ -3,11 +3,13 @@ import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { readFileSync } from "fs";
 import { join } from "path";
 
+import type { Resolvers } from "../../types";
+
 const typeDefs = readFileSync(join(process.cwd(), "schema.graphql"), {
   encoding: "utf8",
 });
 
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
     // hello: () => "world",
     cart: (_, { id }) => {

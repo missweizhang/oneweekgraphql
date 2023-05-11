@@ -39,3 +39,37 @@ Configure routes, see Apollo server integration with Next.js:
 https://github.com/apollo-server-integrations/apollo-server-integration-next
 
 Add `schema.graphql` and start server with schema and resolvers.
+
+## 4. Install and configure GraphQL Code Generator
+
+```
+npm install -D -E @graphql-codegen/cli
+npx graphql-codegen init
+```
+
+? What type of application are you building? Backend - API or server
+? Where is your schema?: (path or url) schema.graphql
+? Pick plugins: TypeScript (required by other typescript plugins), TypeScript Resolvers (strongly typed resolve functions)
+? Where to write the output: types.ts
+? Do you want to generate an introspection file? Yes
+? How to name the config file? (codegen.ts)
+? What script in package.json should run the codegen? (codegen)
+
+Notice the new script `codegen` generated in `package.json`
+
+```
+npm install
+npm run codegen
+```
+
+See new file `types.ts` generated in the root directory.
+
+Add type imports to `app/api/graphql.ts`:
+
+```
+import type { Resolvers } from "../../types";
+//  ...
+const resolvers: Resolvers = {
+//  ...
+}
+```
