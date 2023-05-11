@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "codegen": "graphql-codegen --config codegen.ts",
+    "db:start": "docker compose up",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio"
@@ -20,6 +21,7 @@
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "currency-formatter": "1.5.9",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "graphql": "^16.6.0",
@@ -35,6 +37,7 @@
     "@graphql-codegen/introspection": "3.0.1",
     "@graphql-codegen/typescript": "3.0.4",
     "@graphql-codegen/typescript-resolvers": "3.2.1",
+    "@types/currency-formatter": "1.5.1",
     "prisma": "4.14.0"
   }
 }

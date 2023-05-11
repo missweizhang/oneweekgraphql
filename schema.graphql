@@ -5,7 +5,7 @@ type Query {
 type Cart {
   id: ID!
   totalItems: Int!
-  item: [CartItem!]!
+  items: [CartItem!]!
   subTotal: Money!
 }
 

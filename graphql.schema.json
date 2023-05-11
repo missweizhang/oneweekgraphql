@@ -38,7 +38,7 @@
             "deprecationReason": null
           },
           {
-            "name": "item",
+            "name": "items",
             "description": null,
             "args": [],
             "type": {

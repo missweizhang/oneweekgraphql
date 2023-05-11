@@ -19,7 +19,7 @@ export type Scalars = {
 export type Cart = {
   __typename?: 'Cart';
   id: Scalars['ID'];
-  item: Array<CartItem>;
+  items: Array<CartItem>;
   subTotal: Money;
   totalItems: Scalars['Int'];
 };
@@ -146,7 +146,7 @@ export type ResolversParentTypes = {
 
 export type CartResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Cart'] = ResolversParentTypes['Cart']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  item?: Resolver<Array<ResolversTypes['CartItem']>, ParentType, ContextType>;
+  items?: Resolver<Array<ResolversTypes['CartItem']>, ParentType, ContextType>;
   subTotal?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
   totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
