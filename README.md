@@ -23,3 +23,17 @@ Replace contents of `app/page.tsx` with:
 ```
 
 Remove css in `app/global.css` except tailwind import.
+
+## 3. Install Apollo GraphQL Server and configure API route
+
+install dependencies
+
+```
+npm install @apollo/server graphql @as-integrations/next
+```
+
+Create server at `app/api/graphql.ts`:
+https://www.apollographql.com/docs/apollo-server/getting-started/
+
+Configure routes, see Apollo server integration with Next.js:
+https://github.com/apollo-server-integrations/apollo-server-integration-next
