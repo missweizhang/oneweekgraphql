@@ -6,6 +6,11 @@ const config: CodegenConfig = {
   generates: {
     "types.ts": {
       config: {
+        mapperTypeSuffix: "Model",
+        mappers: {
+          Cart: "@prisma/client#Cart",
+          CartItem: "@prisma/client#CartItem",
+        },
         contextType: "./app/api/graphql#GraphQLContext",
       },
       plugins: ["typescript", "typescript-resolvers"],

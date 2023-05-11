@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { Cart as CartModel, CartItem as CartItemModel } from '@prisma/client';
 import { GraphQLContext } from './app/api/graphql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -18,7 +19,26 @@ export type Scalars = {
 export type Cart = {
   __typename?: 'Cart';
   id: Scalars['ID'];
+  item: Array<CartItem>;
+  subTotal: Money;
   totalItems: Scalars['Int'];
+};
+
+export type CartItem = {
+  __typename?: 'CartItem';
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  image?: Maybe<Scalars['String']>;
+  lineTotal: Money;
+  name: Scalars['String'];
+  quantity: Scalars['Int'];
+  unitTotal: Money;
+};
+
+export type Money = {
+  __typename?: 'Money';
+  amount: Scalars['Int'];
+  formatted: Scalars['String'];
 };
 
 export type Query = {
@@ -103,9 +123,11 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  Cart: ResolverTypeWrapper<Cart>;
+  Cart: ResolverTypeWrapper<CartModel>;
+  CartItem: ResolverTypeWrapper<CartItemModel>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Money: ResolverTypeWrapper<Money>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
 };
@@ -113,16 +135,37 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
-  Cart: Cart;
+  Cart: CartModel;
+  CartItem: CartItemModel;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
+  Money: Money;
   Query: {};
   String: Scalars['String'];
 };
 
 export type CartResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Cart'] = ResolversParentTypes['Cart']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  item?: Resolver<Array<ResolversTypes['CartItem']>, ParentType, ContextType>;
+  subTotal?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
   totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CartItemResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['CartItem'] = ResolversParentTypes['CartItem']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lineTotal?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  unitTotal?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MoneyResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Money'] = ResolversParentTypes['Money']> = {
+  amount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  formatted?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -132,6 +175,8 @@ export type QueryResolvers<ContextType = GraphQLContext, ParentType extends Reso
 
 export type Resolvers<ContextType = GraphQLContext> = {
   Cart?: CartResolvers<ContextType>;
+  CartItem?: CartItemResolvers<ContextType>;
+  Money?: MoneyResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 

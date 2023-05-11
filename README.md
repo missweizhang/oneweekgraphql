@@ -188,3 +188,24 @@ Add config for contextType to `codegen.ts` configuration:
 ```
 
 Run `npm run codegen`.
+
+## 7. Create prisma schema models
+
+Create models for our types in `schema.prisma`.
+
+Run `npm run db:generate`.
+
+In `codegen.ts`, add the following mappers to the config:
+
+```
+  mapperTypeSuffix: "Model",
+  mappers: {
+    Cart: "@prisma/client#Cart",
+    CartItem: "@prisma/client#CartItem",
+  },
+```
+
+Run `npm run codegen`.
+
+Open `types.ts` and you should see the new Model types imported from prisma client.
+If you see an error, restart VS Code and the error should go away.
