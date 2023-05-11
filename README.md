@@ -209,3 +209,19 @@ Run `npm run codegen`.
 
 Open `types.ts` and you should see the new Model types imported from prisma client.
 If you see an error, restart VS Code and the error should go away.
+
+### Migrate database
+
+Add scripts to `package.json`:
+
+```
+  "db:migrate": "prisma migrate dev",
+  "db:studio": "prisma studio"
+```
+
+Run `npm run db:migrate`.
+Choose to reset the database entirely.
+
+? Enter a name for the new migration: › init cart setup
+
+Note the new `migration.sql` file in the `prisma/migrations/<timestamp>_<migration_name>` folder, which contains the SQL query needed to recreate our database tables.
