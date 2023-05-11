@@ -103,3 +103,88 @@ Run the command to create and run database:
 ```
 docker compose up
 ```
+
+## 6. Install and configure Prisma
+
+Follow Prisma.io's Get Started guide:
+https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-mysql
+
+```
+npm install -E -D prisma
+npx prisma init
+```
+
+Update `provider` in `schema.prisma`:
+
+```
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+```
+
+Update `DATABASE_URL` in `.env`:
+
+```
+DATABASE_URL="mysql://root:password@localhost:3307/mydb"
+```
+
+Run docker:
+
+```
+docker compose up
+```
+
+Add script `"db:generate": "prisma generate"` to `package.json`.
+
+Install prisma client dependency:
+
+```
+npm install -E @prisma/client
+```
+
+Create a file `lib/prisma.ts` with the [following content](https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices):
+
+```
+import { PrismaClient } from '@prisma/client'
+
+const globalForPrisma = global as unknown as {
+  prisma: PrismaClient | undefined
+}
+
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log: ['query'],
+  })
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+```
+
+Add prisma client to `app/api/graphql.ts`:
+
+```
+import type { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
+
+export type GraphQLContext = {
+  prisma: PrismaClient;
+};
+```
+
+Add config for contextType to `codegen.ts` configuration:
+
+```
+...
+"types.ts": {
+  config: {
+    contextType: "./app/api/graphql#GraphQLContext",
+  },
+}
+```
+
+Run `npm run codegen`.
