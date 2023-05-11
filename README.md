@@ -73,3 +73,33 @@ const resolvers: Resolvers = {
 //  ...
 }
 ```
+
+## 5. Install and configure Docker Compose
+
+Add a file `docker-compose.yml` to the root directory with the following contents:
+
+```
+version: "3"
+
+services:
+  database:
+    platform: linux/amd64
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=mydb
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3307:3306"
+```
+
+Start Docker Desktop (install from [docker.com](https://docs.docker.com/desktop/install/windows-install/)).
+See no containers in Docker at the moment.
+
+Run the command to create and run database:
+
+```
+docker compose up
+```
