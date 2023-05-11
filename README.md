@@ -37,3 +37,5 @@ https://www.apollographql.com/docs/apollo-server/getting-started/
 
 Configure routes, see Apollo server integration with Next.js:
 https://github.com/apollo-server-integrations/apollo-server-integration-next
+
+Add `schema.graphql` and start server with schema and resolvers.
